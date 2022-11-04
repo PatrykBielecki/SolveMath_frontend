@@ -1,0 +1,7 @@
+{
+  "name": "solvemathUi",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
