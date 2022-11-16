@@ -1,0 +1,38 @@
+ion-input.myInput {
+  background: #eff1f9;
+  color: #000;
+  placeholder-color: #ABAFB1;
+  placeholder-opacity: .8;
+  border-radius: 10px;
+  padding: 20px;
+  width: 90%;
+  margin: 10%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.block {
+    white-space: normal;
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+}
+
+.round-box {
+    text-align: left;
+    border-radius: 15px;
+    padding: 20px;
+    color: #000000;
+    background: #FFFFFF;
+}
+
+.myInputButton{
+  margin: 2%;
+  width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
