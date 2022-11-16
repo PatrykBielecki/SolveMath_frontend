@@ -7,10 +7,10 @@
 <ion-content>
 
   <div class="block round-box">
-    <ion-input class="myInput" placeholder="Name" [(ngModel)]="name"></ion-input>
-    <ion-input class="myInput" placeholder="Team id" [(ngModel)]="team_id"></ion-input>
-    <ion-input class="myInput" placeholder="Score" [(ngModel)]="score"></ion-input>
-    <ion-button class="myInputButton" (click)="submitDates()">Login (add user dla testow)</ion-button>
+    <ion-input class="myInput" placeholder="Name" [(ngModel)]="name" (ngModelChange)="name = $event.toLocaleUpperCase()"></ion-input>
+    <ion-input class="myInput" placeholder="Team id" [(ngModel)]="team_id" (ngModelChange)="team_id = $event.toLocaleUpperCase()"></ion-input>
+    <ion-input class="myInput" placeholder="Score" [(ngModel)]="score" (ngModelChange)="score = $event.toLocaleUpperCase()"></ion-input>
+    <ion-button class="myInputButton" (click)="submitDates()">Login</ion-button>
   </div>
 
 
