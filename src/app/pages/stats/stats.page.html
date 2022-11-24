@@ -1,17 +1,48 @@
 <ion-header>
   <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/users"></ion-back-button>
+    </ion-buttons>
     <ion-title>Statystyki</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-  <div class="block round-box">
-    <ion-button class="myInputButton" >Jednoosobowy</ion-button>
-    <ion-button class="myInputButton" >Wyzwanie</ion-button>
-    <ion-button class="myInputButton" >Oczekujące wyzwania</ion-button>
-    <ion-button class="myInputButton" >Statystyki</ion-button>
+  <div class="list">
+    <ion-list class="round-box">
+      <div style="font-weight: bold; padding-left: 2%; padding-bottom: 1%; text-align: left; color: #000000;">
+        <ion-text>Players list</ion-text>
+      </div>
+      <ion-item class="list-button">
+        <ion-label class="ion-text-wrap">
+          <div style="color: #000000;"><ion-text>Id</ion-text></div>
+        </ion-label>
+        <ion-label class="ion-text-wrap">
+          <div style="color: #000000;"><ion-text>Name</ion-text></div>
+        </ion-label>
+        <ion-label class="ion-text-wrap">
+          <div style="color: #000000;"><ion-text>Surname</ion-text></div>
+        </ion-label>
+        <ion-label class="ion-text-wrap">
+          <div style="color: #000000;"><ion-text>Extra info</ion-text></div>
+        </ion-label>
+      </ion-item>
+      <ion-item  *ngFor="let item of users">
+        <ion-label class="ion-text-wrap">
+          <h3>{{item.user_id}}</h3>
+        </ion-label>
+        <ion-label class="ion-text-wrap">
+          <h3>{{item.user_name}}</h3>
+        </ion-label>
+        <ion-label class="ion-text-wrap">
+          <h3>{{item.user_team_id}}</h3>
+        </ion-label>
+        <ion-label class="ion-text-wrap">
+          <h3>{{item.user_score}}</h3>
+        </ion-label>
+      </ion-item>
+    </ion-list>
   </div>
-
-
 </ion-content>
+
+
