@@ -8,7 +8,17 @@ import { Router } from '@angular/router';
 })
 export class HomePage implements OnInit {
 
-  constructor(private router: Router) { }
+  username: string = 'STUDENT6';
+  teamName: string = 'STUDENT6';
+
+  constructor(private router: Router) {
+    if (router.getCurrentNavigation().extras.state) {
+      const loginData = this.router.getCurrentNavigation().extras.state;
+      console.log(loginData);
+      this.username = Object.values(loginData)[0];
+      this.teamName = Object.values(loginData)[1];
+    }
+  }
 
   goToProductDetails() {
     this.router.navigate(['/stats']);

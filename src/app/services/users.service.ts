@@ -3,12 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-export interface ApiResult {
-results: any[];
-total_pages: number;
-total_results: number;
-}
-
 @Injectable({
   providedIn: 'root'
 })

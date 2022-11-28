@@ -1,6 +1,7 @@
 import { Component, OnInit, Directive, HostListener } from '@angular/core';
 import { InfiniteScrollCustomEvent, LoadingController, NavController } from '@ionic/angular';
 import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
 
 @Directive({
   selector: '[appIntegerInput]'
@@ -11,36 +12,34 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  name: string;
-  team_id: string;
-  score: string;
+  username: string = 'STUDENT6';
+  team_name: string = 'STUDENT6';
+  users = [];
 
   constructor(
     private loginService: LoginService,
     private loadingCtrl: LoadingController,
+    private router: Router,
+    public nav: NavController
+
   ) { }
-
-
 
   ngOnInit() {}
 
-  async submitDates(event?: InfiniteScrollCustomEvent) {
-    const loading = await this.loadingCtrl.create({
-      message: 'Loading..',
-      spinner: 'bubbles',
-    });
-    await loading.present();
-
-    this.loginService.login(this.name, this.team_id, this.score).subscribe(
+  loginToHome(username, team_name) {
+    this.loginService.login(username, team_name).subscribe(
       (res) => {
-        console.log(res);
-        loading.dismiss();
-        //route here
+        let userId = Object.values(res)[0];
+        let teamId = Object.values(res)[1];
+        let teamName = Object.values(res)[2];
+        let userName = Object.values(res)[3];
+        this.nav.navigateForward('/home', { state: [userName, teamName, userId, teamId]});
+
       },
       (err) => {
         console.log(err);
-        loading.dismiss();
       }
     );
   }
+
 }
