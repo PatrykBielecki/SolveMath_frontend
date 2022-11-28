@@ -9,7 +9,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  login(name: string, team_id: string, score: string) {
-    return this.http.post(`http://localhost:8080/api/add_user/${name}/${team_id}/${score}`, '');
+  login(username: string, team_name: string) {
+    return this.http.post(`http://localhost:8080/api/login_to_home/${username}/${team_name}`, '');
   }
 }

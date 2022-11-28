@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent, LoadingController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
 import { environment } from 'src/environments/environment';
-import { ApiResult } from 'src/app/services/users.service';
+
 
 @Component({
   selector: 'app-users',
