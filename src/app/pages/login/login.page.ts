@@ -21,12 +21,18 @@ export class LoginPage implements OnInit {
     private loadingCtrl: LoadingController,
     private router: Router,
     public nav: NavController
-
   ) { }
 
   ngOnInit() {}
 
-  loginToHome(username, team_name) {
+  async loginToHome(username, team_name) {
+
+    const loading = await this.loadingCtrl.create({
+        message: 'Loading..',
+        spinner: 'bubbles',
+      });
+      await loading.present();
+
     this.loginService.login(username, team_name).subscribe(
       (res) => {
         let userId = Object.values(res)[0];
@@ -34,10 +40,11 @@ export class LoginPage implements OnInit {
         let teamName = Object.values(res)[2];
         let userName = Object.values(res)[3];
         this.nav.navigateForward('/home', { state: [userName, teamName, userId, teamId]});
-
+        loading.dismiss();
       },
       (err) => {
         console.log(err);
+        loading.dismiss();
       }
     );
   }

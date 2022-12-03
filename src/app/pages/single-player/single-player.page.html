@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="countdown-short">
+    <div id="countdown-number-short"></div>
+    <svg id="svg-short">
+      <circle r="18" cx="20" cy="20"></circle>
+    </svg>
+  </div>
+
+  <div id="countdown-long">
+    <div id="countdown-number-long"></div>
+    <svg id="svg-long">
+      <circle r="18" cx="20" cy="20"></circle>
+    </svg>
+  </div>
+
+  <div id="question-box" class="block round-box">
+    <ion-text class="myText" color="secondary">
+      <h1 id="question"></h1>
+    </ion-text>
+    <br/>
+    <ion-button class="myInputButton" id="ans-1" (click)="answerClicked()"></ion-button>
+    <ion-button class="myInputButton" id="ans-2" (click)="answerClicked()"></ion-button>
+    <ion-button class="myInputButton" id="ans-3" (click)="answerClicked()"></ion-button>
+    <ion-button class="myInputButton" id="ans-4" (click)="answerClicked()"></ion-button>
+  </div>
+
+</ion-content>
