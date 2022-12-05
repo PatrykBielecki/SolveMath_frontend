@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Directive, HostListener } from '@angular/core';
+import { InfiniteScrollCustomEvent, LoadingController, NavController } from '@ionic/angular';
+import { GameService } from 'src/app/services/game.service';
+import { Router } from '@angular/router';
+import {LoginService} from "../../services/login.service";
 
 @Component({
   selector: 'app-single-player',
@@ -7,35 +11,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SinglePlayerPage implements OnInit {
 
-  public edited = false;
+  term_1_arr;
+  operator_arr;
+  term_2_arr;
+  term_3_arr;
+  ans_1_arr;
+  ans_2_arr;
+  ans_3_arr;
+  ans_4_arr;
+  canGuess = false;
+  iteration = 0;
 
-  public term_1_arr   = [2, 3, 4, 10, 1];
-  public operator_arr = ['+', '-', '*', '/', '+'];
-  public term_2_arr   = [3, 4, 5, 5, 10];
-  public term_3_arr   = [5, -1, 20, 2, 11];
-  public ans_1_arr    = [5, 0, 18, 5, 11];
-  public ans_2_arr    = [3, -1, 19, 4, 12];
-  public ans_3_arr    = [4, 1, 20, 3, 13];
-  public ans_4_arr    = [6, -2, 21, 2, 10];
-
-  constructor() { }
+  constructor(
+    private gameService: GameService,
+    private loadingCtrl: LoadingController
+  ) { }
 
   ngOnInit() {
 
-//     async function secondFunction() {
-//         console.log('Before promise call.')
-//         //Await for the first function to complete
-//         await startGame(0)
-//         console.log('Next step.')
-//     };
-//
-//     secondFunction()
 
-    this.startGame(0);
+
+    this.generateEquation();
+
+
+    this.startGame(this.iteration);
+    this.iteration++;
+    this.startGame(this.iteration);
+
+    console.log(this.iteration);
+
 
   }
 
   public startGame(i){
+
+    this.canGuess = false;
 
     var countdownNumberShort = document.getElementById('countdown-number-short');
     var countdownDivShort = document.getElementById('countdown-short');
@@ -73,6 +83,7 @@ export class SinglePlayerPage implements OnInit {
       countdownDivShort.style.display = 'none';
 
       this.loadQuestion(i);
+      this.canGuess = true;
 
       countdownNumberLong.textContent = countdownLong.toString();
       intervalLong = setInterval(function() {
@@ -105,6 +116,75 @@ export class SinglePlayerPage implements OnInit {
     ans_2.textContent = this.ans_2_arr[i].toString();
     ans_3.textContent = this.ans_3_arr[i].toString();
     ans_4.textContent = this.ans_4_arr[i].toString();
+  }
+
+  async generateEquation() {
+
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading..',
+      spinner: 'bubbles',
+    });
+    await loading.present();
+
+    this.gameService.generateEquation().subscribe(
+      (res) => {
+
+        this.term_1_arr = res['term_1_arr'];
+        this.term_2_arr = res['term_2_arr'];
+        this.operator_arr = res['operator_arr'];
+        this.term_3_arr = res['term_3_arr'];
+        this.ans_1_arr = res['ans_1_arr'];
+        this.ans_2_arr = res['ans_2_arr'];
+        this.ans_3_arr = res['ans_3_arr'];
+        this.ans_4_arr = res['ans_4_arr'];
+        console.log(this.term_1_arr)
+        console.log(this.term_2_arr)
+        loading.dismiss();
+      },
+      (err) => {
+        console.log(err);
+        loading.dismiss();
+      }
+    );
+  }
+
+
+  answerClicked(buttonId){
+    var ans_1 = document.getElementById('ans-1').textContent;
+    var ans_2 = document.getElementById('ans-2').textContent;
+    var ans_3 = document.getElementById('ans-3').textContent;
+    var ans_4 = document.getElementById('ans-4').textContent;
+
+    if(buttonId === 1) {
+      if (ans_1 == this.term_3_arr[this.iteration]) {
+        console.log('Correct!');
+      } else {
+        console.log('BAD!');
+        console.log(ans_1);
+        console.log(this.term_3_arr[this.iteration]);
+      }
+    }
+    if(buttonId === 2) {
+      if (ans_2 == this.term_3_arr[this.iteration]) {
+        console.log('Correct!');
+      } else {
+        console.log('BAD!');
+      }
+    }
+    if(buttonId === 3) {
+      if (ans_3 == this.term_3_arr[this.iteration]) {
+        console.log('Correct!');
+      } else {
+        console.log('BAD!');
+      }
+    }
+    if(buttonId === 4) {
+      if (ans_4 == this.term_3_arr[this.iteration]) {
+        console.log('Correct!');
+      } else {
+        console.log('BAD!');
+      }
+    }
   }
 
 }
