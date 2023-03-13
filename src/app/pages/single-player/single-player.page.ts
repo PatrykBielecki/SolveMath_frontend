@@ -21,6 +21,7 @@ export class SinglePlayerPage implements OnInit {
   ans_4_arr;
   canGuess = false;
   iteration = 0;
+  points = 0;
 
   constructor(
     private gameService: GameService,
@@ -33,17 +34,52 @@ export class SinglePlayerPage implements OnInit {
 
     this.generateEquation();
 
+    var win = document.getElementById('end');
+        win.style.display = 'none';
+
+
 
     this.startGame(this.iteration);
-    this.iteration++;
-    this.startGame(this.iteration);
 
-    console.log(this.iteration);
+
+    setTimeout(() => {
+            this.iteration++;
+            this.startGame(this.iteration);
+          }, 14000);
+
+
+
+    setTimeout(() => {
+            this.iteration++;
+            this.startGame(this.iteration);
+          }, 14000 * 2);
+
+
+    setTimeout(() => {
+            this.iteration++;
+            this.startGame(this.iteration);
+          }, 14000 * 3);
+
+    setTimeout(() => {
+            this.iteration++;
+            this.startGame(this.iteration);
+          }, 14000 * 4);
+
+    setTimeout(() => {
+    document.getElementById('question-box').style.display = 'none';
+                win.style.display = 'block';
+                win.textContent = "Gratulacje, zebrane punkty: " + this.points;
+              }, 14000 * 5);
 
 
   }
 
   public startGame(i){
+
+    document.getElementById('ans-1').style.color = "white";
+    document.getElementById('ans-2').style.color = "white";
+    document.getElementById('ans-3').style.color = "white";
+    document.getElementById('ans-4').style.color = "white";
 
     this.canGuess = false;
 
@@ -98,6 +134,7 @@ export class SinglePlayerPage implements OnInit {
       }, 10000);
 
     }, 3000);
+    clearInterval(intervalLong);
   }
 
 
@@ -137,8 +174,13 @@ export class SinglePlayerPage implements OnInit {
         this.ans_2_arr = res['ans_2_arr'];
         this.ans_3_arr = res['ans_3_arr'];
         this.ans_4_arr = res['ans_4_arr'];
-        console.log(this.term_1_arr)
+        console.log(this.term_1_arr);
+        console.log(this.operator_arr);
         console.log(this.term_2_arr)
+        console.log(this.ans_1_arr)
+        console.log(this.ans_2_arr)
+        console.log(this.ans_3_arr)
+        console.log(this.ans_4_arr)
         loading.dismiss();
       },
       (err) => {
@@ -150,41 +192,56 @@ export class SinglePlayerPage implements OnInit {
 
 
   answerClicked(buttonId){
+
     var ans_1 = document.getElementById('ans-1').textContent;
     var ans_2 = document.getElementById('ans-2').textContent;
     var ans_3 = document.getElementById('ans-3').textContent;
     var ans_4 = document.getElementById('ans-4').textContent;
-
-    if(buttonId === 1) {
-      if (ans_1 == this.term_3_arr[this.iteration]) {
-        console.log('Correct!');
-      } else {
-        console.log('BAD!');
-        console.log(ans_1);
-        console.log(this.term_3_arr[this.iteration]);
+    if(this.canGuess){
+      if(buttonId === 1) {
+        if (ans_1 == this.term_3_arr[this.iteration]) {
+          console.log('Correct!');
+          this.points += 1;
+          document.getElementById('ans-1').style.color = "green";
+        } else {
+          console.log('BAD!');
+          console.log(ans_1);
+          console.log(this.term_3_arr[this.iteration]);
+          document.getElementById('ans-1').style.color = "red";
+        }
+      }
+      if(buttonId === 2) {
+        if (ans_2 == this.term_3_arr[this.iteration]) {
+          console.log('Correct!');
+          this.points += 1;
+          document.getElementById('ans-2').style.color = "green";
+        } else {
+          console.log('BAD!');
+          document.getElementById('ans-2').style.color = "red";
+        }
+      }
+      if(buttonId === 3) {
+        if (ans_3 == this.term_3_arr[this.iteration]) {
+          console.log('Correct!');
+          this.points += 1;
+          document.getElementById('ans-3').style.color = "green";
+        } else {
+          console.log('BAD!');
+          document.getElementById('ans-3').style.color = "red";
+        }
+      }
+      if(buttonId === 4) {
+        if (ans_4 == this.term_3_arr[this.iteration]) {
+          console.log('Correct!');
+          this.points += 1;
+          document.getElementById('ans-4').style.color = "green";
+        } else {
+          console.log('BAD!');
+          document.getElementById('ans-4').style.color = "red";
+        }
       }
     }
-    if(buttonId === 2) {
-      if (ans_2 == this.term_3_arr[this.iteration]) {
-        console.log('Correct!');
-      } else {
-        console.log('BAD!');
-      }
-    }
-    if(buttonId === 3) {
-      if (ans_3 == this.term_3_arr[this.iteration]) {
-        console.log('Correct!');
-      } else {
-        console.log('BAD!');
-      }
-    }
-    if(buttonId === 4) {
-      if (ans_4 == this.term_3_arr[this.iteration]) {
-        console.log('Correct!');
-      } else {
-        console.log('BAD!');
-      }
-    }
+    this.canGuess = false;
   }
 
 }
