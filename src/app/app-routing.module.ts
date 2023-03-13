@@ -19,6 +19,11 @@ pathMatch: 'full',
     path: 'home/stats',
     loadChildren: () => import('./pages/stats/stats.module').then( m => m.StatsPageModule)
   },
+  {
+    path: 'home/single-player',
+    loadChildren: () => import('./pages/single-player/single-player.module').then( m => m.SinglePlayerPageModule)
+  },
+
 
 
 ];

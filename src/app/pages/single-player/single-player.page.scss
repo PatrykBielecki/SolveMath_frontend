@@ -1,0 +1,143 @@
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #333;
+}
+
+#countdown-short {
+  position: relative;
+  margin: auto;
+  margin-top: 100px;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+}
+
+#countdown-number-short {
+  color: white;
+  display: inline-block;
+  line-height: 40px;
+}
+
+#svg-short {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+#svg-short circle {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke: white;
+  fill: none;
+  animation: countdown-short 3s linear infinite forwards;
+}
+
+@keyframes countdown-short {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 113px;
+  }
+}
+
+#countdown-long {
+  position: relative;
+  margin: auto;
+  margin-top: 100px;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+}
+
+#countdown-number-long {
+  color: white;
+  display: inline-block;
+  line-height: 40px;
+}
+
+#end {
+position: relative;
+  margin: auto;
+  margin-top: 100px;
+  height: 40px;
+  font-size: 50px;
+  text-align: center;
+  color: white;
+  display: inline-block;
+  line-height: 40px;
+}
+
+#svg-long {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+#svg-long circle {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke: white;
+  fill: none;
+  animation: countdown-short 10s linear infinite forwards;
+}
+
+@keyframes countdown-long {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 113px;
+  }
+}
+
+ion-input.myInput {
+  background: #eff1f9;
+  color: #000;
+  placeholder-color: #ABAFB1;
+  placeholder-opacity: .8;
+  border-radius: 10px;
+  padding: 20px;
+  width: 90%;
+  margin: 10%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.block {
+    white-space: normal;
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+}
+
+.round-box {
+    text-align: center;
+    border-radius: 15px;
+    padding: 20px;
+    color: #000000;
+    background: #FFFFFF;
+}
+
+.myInputButton{
+  margin: 2%;
+  width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+}
